@@ -1,0 +1,78 @@
+<html>
+    <head>
+        <title>someGame</title>
+        <link rel="stylesheet" href="/home/z0407@ad.ziffity.com/Documents/projectZiffity/firstPage.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+        <script> 
+            $(document).ready(function(){
+                var details = [
+                    { name: "veera maheswar reddy", id: 'Z0406' },
+                    { name: "thanniru karthik", id: 'Z0407' },
+                    { name: "praveen", id: 'Z0404' },
+                    { name: "Pranesh", id: 'Z0405' }
+                ];
+
+                var distance = 2;
+                var i=0;
+                $(".contentDisplayer").fadeOut('fast')
+                $("button.moveRight").on("click", function() {
+                    distance += 9;
+                    var percentage = distance;
+                    $(".humancontainer").animate({ left: percentage + '%' }, 1000);
+                   
+                    $(".contentDisplayer").animate({ left: percentage + percentage + '%' },function()
+                    {
+                        $(".contentDisplayer").fadeIn('fast')
+                        $(".contentDisplayer").css('color', 'white');
+                    $(".contentDisplayer").html('<p>'+'Name:'+details[i].name+'<br>'+'id:'+details[i].id+'</p>')
+                
+                    updateListBackground(percentage);
+                    i++;
+                    });
+                    $(".contentDisplayer").fadeOut('fast')
+
+                });
+
+                $("button.moveDown").on("click", function() {
+                    $(".humancontainer").animate({ bottom: '0%' }, 2000);
+                });
+
+                function updateListBackground(percentage) {
+                    var containerWidth = $(".container").width();
+                    var containerLeft = $(".container").offset().left;
+                    var humanContainerLeft = percentage / 100 * containerWidth + containerLeft;
+                    $(".firstContainer ul li").each(function(index) {
+                        var liLeft = $(this).offset().left;
+                        if (liLeft < humanContainerLeft) {
+                            $(this).css('background-color', 'skyblue');
+                        } else {
+                            $(this).css('background-color', 'inherit');
+                        }
+                    });
+                }
+            });
+        </script> 
+    </head>
+    <body>
+        <button class="moveRight">Move right</button>
+        <button class="moveDown">Move Down</button>
+
+        <div class="humancontainer">
+            <img src="/home/z0407@ad.ziffity.com/Documents/projectZiffity/6GNx-unscreen.gif"  alt="image">
+            <div class="contentDisplayer"></div>
+        </div>
+        <div class="container">
+            <div class="firstContainer">
+                <ul>
+                    <li>veera</li>
+                    <li>karthik</li>
+                    <li>praveen</li>
+                    <li>pranesh</li>
+                </ul>
+            </div>
+            <div class="secondContainer"></div>
+        </div>
+        
+        <br>
+    </body>
+</html>
